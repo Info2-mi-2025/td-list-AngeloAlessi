@@ -76,6 +76,7 @@ int sum_list(const List* list)
 
 int min_list(const List* list)
 {
+
     return 0;
 }
 
@@ -86,6 +87,12 @@ int max_list(const List* list)
 
 void filter_list(List* list, int threshold)
 {
+}
+
+void version()
+{
+    printf("version 1.0");
+    return 0;
 }
 
 void help()
@@ -100,6 +107,7 @@ void help()
     printf("  --version, -v     Affiche la version du programme\n");
     printf("  --min             Affiche la valeur minimale de la liste\n");
     printf("  --max             Affiche la valeur maximale de la liste\n");
+    return 0;
 }
 
 // Lecture fichier
@@ -129,8 +137,74 @@ int main(int argc, char* argv[])
     // Ne pas modifier
     init_file();
     // ---------------
-
     if(argc < 2) return 1;
+
+    bool option_add = false;
+    bool fichier = false;
+    char* filearg = NULL;
+    List liste = {NULL, NULL};
+
+    for (int i = 0; i < argc; i++)
+    {
+        if (strcmp(argv[i],"--add")== 0){
+            option_add = true;
+        }
+        
+        else if(strcmp(argv[i],"--help")== 0) {
+            help();
+        }
+        else if(strcmp(argv[i],"--version")== 0 || strcmp(argv[i],"-v")== 0){
+            version();          
+        }
+        else if(strcmp(argv[i],"--reverse")== 0){
+            reverse_list(&liste);
+        }
+        else if(strcmp(argv[i],"--sum")== 0){
+            sum_list(&liste);
+        }
+        else if (strcmp(argv[i],"--min")== 0)
+        {
+            min_list(&liste);
+        }
+        else if (strcmp(argv[i],"--max")== 0)
+        {
+            max_list(&liste);
+        }
+        
+       else{
+        filearg* = argv[i];
+        fichier = true;
+       }
+    }  
+    if (fichier == NULL)
+    {
+        return 2;
+    }
+    FILE* filename = fopen(filearg,"r");
+    if (filename == NULL)
+    {
+        return 2;
+    }
+    
+    
+    
+    int val = 0;
+    char ligne[256];
+    while (fgets(ligne,sizeof(ligne),f))
+    {
+        if (sscanf(ligne,"&d",&val)==1)
+        {
+            list[size].value = val;
+            size++;
+        }
+        
+    }
+    
+    
     
     return 0;
 }
+typedef struct {
+    int value;
+} Element;
+
